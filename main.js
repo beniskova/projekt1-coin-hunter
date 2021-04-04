@@ -86,7 +86,7 @@ function priStiskuKlavesy(udalost) {
 	if (udalost.key === 'ArrowRight') {
 		panacekX += 10;
 		if (panacekX + panacekSirka > window.innerWidth) {
-			panacekX - window.innerWidth - panacekSirka;
+			panacekX = window.innerWidth - panacekSirka;
 		}
 		panacek.src = 'obrazky/panacek-vpravo.png';
 	}
