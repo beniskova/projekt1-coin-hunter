@@ -14,6 +14,7 @@ let mince, minceX, minceY, minceSirka, minceVyska;
 let score, pocetMinci;
 let zvukMince, zvukFanfara;
 let hrajeHudba = false;
+let hudba;
 
 // tato funkce se spustí při načtení stránky
 // tj. ve chvíli, kdy je načtené komplet HTML, CSS a všechny obrázky a zvuky
@@ -27,6 +28,8 @@ function priNacteniStranky() {
 	score = document.querySelector('#score');
 	zvukMince = document.querySelector('#zvukmince');
 	zvukFanfara = document.querySelector('#zvukfanfara');
+	hudba = document.querySelector('#hudba');
+
 	//nastavíme výchozí hodnotu pro score
 	pocetMinci = 0;
 
@@ -46,8 +49,8 @@ function priNacteniStranky() {
 	// a vygenerujeme první minci na náhodné pozici
 	novaMince();
 
-	//spusti se hudba
-
+	//spusti se hudba :-(
+	hudba.play();
 }
 
 // funkce, která umístí panáčka na jeho souřadnice
@@ -120,8 +123,33 @@ function priStiskuKlavesy(udalost) {
 // sem začni psát svůj program
 // fuknce pro otestování kolize panáčka s mincí
 function otestujKolizi() {
-	if (!(panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || panacekY + panacekVyska < minceY || minceY + minceVyska < panacekY))
+	// musíme to napsat :)
+	// otestujeme, zda nedošlo ke kolizi s mincí
+	// toto je nejjednodušší a nejrychlejší test
+	// na průnik dvou obdélníků
+	if (!(panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || panacekY + panacekVyska < minceY || minceY + minceVyska < panacekY)) {
+		// obdélníky se překrývají, mimozemšťan našel minci
+
+		// zvýšíme skóre
+		zvysScore();
+
+		// posuneme minci na novou náhodnou pozici
 		novaMince();
+	}
 }
 
 //počítání score
+function zvysScore() {
+
+	// zvýšíme skóre o 1
+	pocetMinci++;
+
+	// vypíšeme skóre do textu na obrazovce
+	score.innerText = pocetMinci;
+
+	// otestujeme, zda už hráč nemá 5 bodů
+	if (pocetMinci === 5) {
+		// zobrazíme vítěznou hlášku
+		alert('Vyhrála jsi tuhle super hru!');
+	}
+}
