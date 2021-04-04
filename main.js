@@ -19,10 +19,14 @@ let hrajeHudba = false;
 // tj. ve chvíli, kdy je načtené komplet HTML, CSS a všechny obrázky a zvuky
 function priNacteniStranky() {
 
+
 	// do globálních proměnných si uložíme odkaz na objekty panáčka a mince,
 	// abychom je nemuseli při každém použití znovu na stránce hledat pomocí document.querySelector
 	panacek = document.querySelector('#panacek');
 	mince = document.querySelector('#mince');
+	score = document.querySelector('#score');
+	zvukMince = document.querySelector('#zvukmince');
+	zvukFanfara = document.querySelector('#zvukfanfara');
 	//nastavíme výchozí hodnotu pro score
 	pocetMinci = 0;
 
@@ -41,6 +45,8 @@ function priNacteniStranky() {
 
 	// a vygenerujeme první minci na náhodné pozici
 	novaMince();
+
+	//spusti se hudba
 
 }
 
@@ -117,3 +123,5 @@ function otestujKolizi() {
 	if (!(panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || panacekY + panacekVyska < minceY || minceY + minceVyska < panacekY))
 		novaMince();
 }
+
+//počítání score
